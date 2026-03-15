@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@theme{
+--animate-slide-in: slide-in 300ms ease-out;
+@keyframes slide-in{
+  from{
+    transform: translateX(-100%)
+  }
+  to{
+    transform: translateX(0)
+  }
+}
+}
+@layer base {
+  body {
+    @apply  text-gray-800 ;
+  }
+  span,
+  a{
+    @apply inline-block ;
+  }
+  button,
+  a{
+    @apply cursor-pointer ;
+  }
+}
+
+@layer utility {
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8
+  }
+}
+@layer components {
+  .form-control {
+    @apply  px-3 py-2 border border-gray-400/50 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 
+  }
+  .btn{
+    @apply px-4 py-2 rounded-lg  text-gray-900 font-semibold hover:bg-gray-300 transition-colors duration-200 bg-gray-200
+  }
+}
+.swiper-pagination-bullet{
+  width:12px !important;
+  height: 12px !important;
+  background: rgba(255,255,255,0.5) !important ;
+  opacity: 1 !important; 
+  transition:all 0.3s ease;
+}
+.swiper-pagination-bullet:hover{
+  background: rgba(255,255,255,0.8) !important ;
+  transform:scale(1.1);
+}
+.swiper-pagination-bullet-active{
+  background: rgba(255,255,255,1) !important ;
+  width: 32px !important;
+  border-radius: 6px !important;
+}
+.image-gallery-image {
+  height: 450px !important;
+  object-fit: contain;
+}
+
+.image-gallery-thumbnail img {
+  height: 80px;
+  object-fit: cover;
+}
