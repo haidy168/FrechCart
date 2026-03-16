@@ -10,7 +10,7 @@ import Providers from "@/components/providers/Providers";
 import { verifytoken } from "@/features/auth/server/auth.action";
 import { getLoggedUserCard } from "@/features/cart/server/cart.action";
 import { CartState } from "@/features/cart/type/cart.type";
-import { error } from "console";
+
 
 config.autoAddCss = false;
 
@@ -36,18 +36,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   let cartState= defaultCartState;
   if(authValues.isAuthenticated){
     try{
-      const cartResponse= await getLoggedUserCard();
-      cartState={
-        cartId:cartResponse.cartId, 
+    const cartResponse = await getLoggedUserCard();
+      cartState = {
+        cartId: cartResponse.cartId, 
         numOfCartItems: cartResponse.numOfCartItems, 
-        products:cartResponse.data.products,
+      
+        products: cartResponse.data.products as any, 
         totalCartPrice: cartResponse.data.totalCartPrice,
         isLoading: false,
-        error:null,
-
-
-      }
-    }catch(error ){
+        error: null,
+    }}
+    catch(error ){
      cart:defaultCartState;
     }
   }
