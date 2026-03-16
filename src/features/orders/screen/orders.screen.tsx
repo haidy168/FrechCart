@@ -6,24 +6,26 @@ import { getUserOrders } from "../server/order.action";
 import OrderCard from "../component/OrderCard";
 import { useAppSelector } from "@/store/store";
 import { useEffect, useState } from "react";
-import { OrdersResponse } from "../type/order.type";
+import { OrdersResponse, Order } from "../type/order.type";
 
 export default function OrdersScreen() {
-
   const { userInfo } = useAppSelector((state) => state.auth);
-  const [orders, setOrder] = useState<OrdersResponse | null>(null);
+  const [orders, setOrders] = useState<OrdersResponse | null>(null);
 
+  // إذا المستخدم غير موجود، لا تعرض أي شيء
   if (!userInfo) {
     return null;
   }
 
+  // جلب الطلبات
   useEffect(() => {
-    const fetchOrder = async () => {
+    const fetchOrders = async () => {
+      if (!userInfo.id) return; // حماية من undefined
       const response = await getUserOrders({ id: userInfo.id });
-      setOrder(response);
+      setOrders(response);
     };
 
-    fetchOrder();
+    fetchOrders();
   }, [userInfo]);
 
   if (!orders) {
@@ -59,7 +61,7 @@ export default function OrdersScreen() {
                 </h1>
 
                 <p className="text-gray-500 text-sm mt-0.5">
-                  {orders.data.length} Orders
+                  {orders.length} Orders
                 </p>
               </div>
             </div>
@@ -76,7 +78,7 @@ export default function OrdersScreen() {
 
         {/* Orders */}
         <div className="space-y-4">
-          {orders.data.map((order) => (
+          {orders.map((order: Order) => (
             <OrderCard key={order._id} orderInfo={order} />
           ))}
         </div>

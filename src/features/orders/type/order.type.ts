@@ -30,7 +30,6 @@ export interface OrderProduct {
     title: string;
     imageCover: string;
     category: OrderCategory;
-
     ratingsAverage: number;
     id: string;
 }
@@ -45,6 +44,13 @@ export interface OrderCartItem {
 
 // Payment Method Type
 export type PaymentMethodType = "cash" | "card";
+
+// Shipping Address
+export interface ShippingAddress {
+    details: string;
+    phone: string;
+    city: string;
+}
 
 // Order
 export interface Order {
