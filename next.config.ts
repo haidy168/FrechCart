@@ -1,36 +1,24 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+import { sources } from "next/dist/compiled/webpack/webpack";
+
+
+const nextConfig: NextConfig = {
+  /* config options here */
   reactCompiler: true,
-
-  // 1. تجاهل أخطاء التايب سكريبت (اللي عملناها)
-  typescript: {
-    ignoreBuildErrors: true,
+  images:{
+    remotePatterns:[
+     new URL(`https://ecommerce.routemisr.com/*/**`)
+    ]
   },
-
-  // 2. تجاهل أخطاء التنسيق (ضيف الجزء ده لو مش موجود)
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "ecommerce.routemisr.com",
-        pathname: "/**",
-      },
-    ],
-  },
-
-  async redirects() {
-    return [
-      {
-        source: "/allorders",
-        destination: "/orders",
-        permanent: true,
-      },
-    ];
-  },
+async redirects() {
+  return [
+    {
+      source: "/allorders",
+      destination: "/orders",
+      permanent: true,
+    },
+  ];
+}
 };
 
 export default nextConfig;
