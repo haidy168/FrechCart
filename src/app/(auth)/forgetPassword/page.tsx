@@ -1,10 +1,11 @@
-import React from "react";
+import React from 'react';
 
 export default function ForgetPassword() {
   return (
-    <div>
-      <h1>Forget Password</h1>
-      <p>Please enter your email to reset your password.</p>
+    <div className="flex min-h-screen items-center justify-center">
+      <h1 className="text-2xl font-bold text-green-600">
+        Forget Password Page (Coming Soon)
+      </h1>
     </div>
   );
 }
