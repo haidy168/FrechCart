@@ -5,12 +5,12 @@ export interface CartResponse {
   data: CartData;
 }
 export interface CartState {
-  numOfCartItems:number
-  cartId:string
-  products:CartProduct[]
-  totalCartPrice:number
-  isLoading:boolean
-  error:string | null
+  numOfCartItems: number;
+  cartId: string;
+  products: CartItem[];
+  totalCartPrice: number;
+  isLoading: boolean;
+  error: string | null;
 }
 export interface CartItem{
   count:number,
