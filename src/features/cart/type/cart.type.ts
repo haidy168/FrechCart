@@ -4,6 +4,7 @@ export interface CartResponse {
   cartId: string;
   data: CartData;
 }
+
 export interface CartState {
   numOfCartItems: number;
   cartId: string;
@@ -12,12 +13,14 @@ export interface CartState {
   isLoading: boolean;
   error: string | null;
 }
-export interface CartItem{
-  count:number,
-  _id: string,
-  product:CartProduct,
-  price:number,
+
+export interface CartItem {
+  _id: string;       // الـ CartItem id
+  count: number;     // عدد القطع
+  price: number;     // سعر الوحدة
+  product: Product;  // المنتج نفسه
 }
+
 export interface CartData {
   _id: string;
   cartOwner: string;
@@ -25,19 +28,19 @@ export interface CartData {
   totalCartPrice: number;
 }
 
-export interface CartProduct {
-  count: number;
-  _id: string;
-  product: Product;
-  price: number;
-}
-
 export interface Product {
   _id: string;
+  id: string;            // ممكن يكون ID من الـ API
   title: string;
   imageCover: string;
-  category: string;
-  brand: string;
+  quantity: number;      // الكمية المتاحة في المخزن
+  category: {
+    _id: string;
+    name: string;
+  };
+  brand: {
+    _id: string;
+    name: string;
+  };
   ratingsAverage: number;
-  id: string;
 }

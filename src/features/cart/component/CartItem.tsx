@@ -2,14 +2,13 @@
 import { faCheck, faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { CartItem as CartItemType } from "../types/cart.types";
+import { CartItem as CartItemType } from "../type/cart.type";
 import Swal from 'sweetalert2';
 import { removeProductFromCart, updateProductFromCart } from "../server/cart.action";
 import { toast } from "react-toastify";
 import { removeProduct, setCartInfo } from "../store/cart.slice";
 import { useDispatch } from "react-redux";
 import { useAppDispatch } from "@/store/store";
-import { id } from "zod/v4/locales";
 export default function CartItem({ info }: { info: CartItemType }) {
   const { _id, count, price, product } = info;
   const { brand, category, imageCover, quantity, title,id } = product;
