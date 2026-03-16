@@ -1,4 +1,4 @@
-import { NextRequest,NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 const protectedRoutes = [
   "/cart",
   "/checkout",
@@ -7,12 +7,7 @@ const protectedRoutes = [
   "/profile",
 ];
 
-const authRoutes = [
-  '/login',
-  '/signup',
-  '/forget-password',
-  '/reset-password',
-];
+const authRoutes = ["/login", "/signup"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -20,20 +15,19 @@ export function proxy(request: NextRequest) {
 
   const isAuthenticated = !!token;
 
-  
   const isProtectedRoute = protectedRoutes.some(
-    (route) => pathname === route || pathname.startsWith(`${route}/`)
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
   );
 
-  const isAuthRoute=authRoutes.some(
-    (route)=>route==pathname|| pathname.startsWith(`${route}/`)
-  )
+  const isAuthRoute = authRoutes.some(
+    (route) => route == pathname || pathname.startsWith(`${route}/`),
+  );
   if (isProtectedRoute && !isAuthenticated) {
-    const loginUrl = new URL('/login', request.url);
+    const loginUrl = new URL("/login", request.url);
     return NextResponse.redirect(loginUrl);
   }
-  if(isAuthRoute&& isAuthenticated){
-return NextResponse.redirect(new URL("/",request.url))
+  if (isAuthRoute && isAuthenticated) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
   return NextResponse.next();
 }
